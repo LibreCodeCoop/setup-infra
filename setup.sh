@@ -11,7 +11,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compo
 echo "PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '">> ~/.bashrc
 
 # Timezone
-sudo timedatectl set-timezone America/Sao_Paulo
+timedatectl set-timezone America/Sao_Paulo
 
 # Pasta raiz dos projetos
 mkdir projects
@@ -26,6 +26,7 @@ cd -
 
 # Postgre
 cp -R ~/infra/postgres ~/projects/
+cd postgres
 cp .env.example .env
 # Edite o .env colocando valores reais
 docker network create reverse-proxy
