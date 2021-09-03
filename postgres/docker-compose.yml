@@ -22,3 +22,4 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_DB
       - POSTGRES_USER
+      - NEXTCLOUD_DB_PASSWORD
