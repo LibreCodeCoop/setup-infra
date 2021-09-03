@@ -24,7 +24,7 @@ docker network create reverse-proxy
 docker-compose up -d
 cd -
 
-# Postgre
+# Postgres
 cp -R ~/infra/postgres ~/projects/
 cd postgres
 cp .env.example .env
@@ -40,8 +40,19 @@ docker network create redis
 docker-compose up -d
 cd -
 
+# ONLYOFFICE
+cp -R ~/infra/onlyoffice ~/projects/
+cd onlyoffice
+docker network create onlyoffice
+docker-compose up -d
+cp .env.example .env
+# Edite o .env colocando valores reais
+cd -
+
 # Nextcloud
 git clone https://github.com/LibreCodeCoop/nextcloud-docker
 cd nextcloud-docker
+mkdir volumes/nginx
+cp ~/infra/nextcloud/nginx/* volumes nginx
 cp .env.example .env
 # Edite o .env colocando valores reais
