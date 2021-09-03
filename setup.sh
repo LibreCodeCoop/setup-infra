@@ -52,7 +52,9 @@ cd -
 # Nextcloud
 git clone https://github.com/LibreCodeCoop/nextcloud-docker
 cd nextcloud-docker
-mkdir volumes/nginx
-cp ~/infra/nextcloud/nginx/* volumes nginx
+mkdir -p volumes/nginx
+cp ~/infra/nextcloud/nginx/* volumes/nginx
+mkdir -p volumes/cron
+cp ~/infra/nextcloud/cron/* volumes/cron/cronfile
 cp .env.example .env
 # Edite o .env colocando valores reais
