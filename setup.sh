@@ -29,7 +29,7 @@ cp -R ~/infra/postgres ~/projects/
 cd postgres
 cp .env.example .env
 # Edite o .env colocando valores reais
-docker network create reverse-proxy
+docker network create postgres
 docker-compose up -d
 cd -
 
