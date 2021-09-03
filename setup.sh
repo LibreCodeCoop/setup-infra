@@ -36,6 +36,7 @@ cd -
 # Redis
 cp -R ~/infra/redis ~/projects/
 cd redis
+docker network create redis
 docker-compose up -d
 cd -
 

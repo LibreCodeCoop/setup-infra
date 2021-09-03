@@ -1,0 +1,27 @@
+version: "3.7"
+
+networks:
+  postgres:
+    external: true
+    name: postgres
+  onlyoffice:
+    external: true
+    name: onlyoffice
+
+services:
+  onlyoffice:
+    image: alehoho/oo-ce-docker-license
+    stdin_open: true
+    tty: true
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./volumes/KronaOne:/var/www/onlyoffice/documentserver/core-fonts/kronaone
+      - ./volumes/onlyoffice/DocumentServer/logs:/var/log/onlyoffice
+      - ./volumes/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data
+      - ./volumes/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice
+      - ./volumes/onlyoffice/DocumentServer/rabbitmq:/var/lib/rabbitmq
+    networks:
+      - postgres
+      - onlyoffice
