@@ -68,7 +68,7 @@ docker-compose exec -u www-data app php occ app:install onlyoffice
 # OBS: Corrija o domínio antes de executar o comando que segue
 docker-compose exec -u www-data app php occ config:app:set --value https://<dominioaqui>/ds-vpath/ onlyoffice DocumentServerUrl
 # Informe o JTW Token antes de executar o comando que segue
-docker-compose exec -u www-data app php occ config:app:set --value JWT_TOKEN onlyoffice DocumentServerUrl
+docker-compose exec -u www-data app php occ config:app:set --value JWT_TOKEN onlyoffice jwt_secret
 docker-compose exec -u www-data app php occ config:app:set --value true onlyoffice customizationForcesave
 docker-compose exec -u www-data app php occ config:app:set --value false onlyoffice customizationFeedback
 docker-compose exec -u www-data app php occ config:app:set --value true onlyoffice customizationCompactHeader
