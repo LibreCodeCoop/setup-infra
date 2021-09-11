@@ -61,18 +61,18 @@ cp .env.example .env
 docker-compose -f docker-compose.fpm.mysql.yml up -d app
 sleep 5
 docker-compose -f docker-compose.fpm.mysql.yml up -d
-docker-compose exec -u www-data app php occ config:system:set default_phone_region BR
-docker-compose exec -u www-data app php occ app:install onlyoffice
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:system:set default_phone_region BR
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ app:install onlyoffice
 
 # Configuração ONLYOFFICE
 mkdir -p volumes/nginx/includes
 cp ~/infra/nextcloud/nginx/onlyoffice.conf volumes/nginx/includes/
 docker-compose -f docker-compose.fpm.mysql.yml restart web
 # OBS: Corrija o domínio antes de executar o comando que segue
-docker-compose exec -u www-data app php occ config:app:set --value https://<dominioaqui>/ds-vpath/ onlyoffice DocumentServerUrl
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value https://<dominioaqui>/ds-vpath/ onlyoffice DocumentServerUrl
 # Informe o JTW Token antes de executar o comando que segue
-docker-compose exec -u www-data app php occ config:app:set --value JWT_TOKEN onlyoffice jwt_secret
-docker-compose exec -u www-data app php occ config:app:set --value true onlyoffice customizationForcesave
-docker-compose exec -u www-data app php occ config:app:set --value false onlyoffice customizationFeedback
-docker-compose exec -u www-data app php occ config:app:set --value true onlyoffice customizationCompactHeader
-docker-compose exec -u www-data app php occ config:app:set --value false onlyoffice sameTab
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value JWT_TOKEN onlyoffice jwt_secret
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value true onlyoffice customizationForcesave
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value false onlyoffice customizationFeedback
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value true onlyoffice customizationCompactHeader
+docker-compose -f docker-compose.fpm.mysql.yml exec -u www-data app php occ config:app:set --value false onlyoffice sameTab
