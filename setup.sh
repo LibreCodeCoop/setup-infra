@@ -58,13 +58,16 @@ mkdir -p volumes/cron
 cp ~/infra/nextcloud/cron/* volumes/cron/cronfile
 cp .env.example .env
 # Edite o .env colocando valores reais
-docker-compose -f docker-compose.fpm.yml up -d app
+docker-compose -f docker-compose.fpm.mysql.yml up -d app
 sleep 5
-docker-compose -f docker-compose.fpm.yml up -d
+docker-compose -f docker-compose.fpm.mysql.yml up -d
 docker-compose exec -u www-data app php occ config:system:set default_phone_region BR
 docker-compose exec -u www-data app php occ app:install onlyoffice
 
 # Configuração ONLYOFFICE
+mkdir -p volumes/nginx/includes
+cp ~/infra/nextcloud/nginx/onlyoffice.conf volumes/nginx/includes/
+docker-compose -f docker-compose.fpm.mysql.yml restart web
 # OBS: Corrija o domínio antes de executar o comando que segue
 docker-compose exec -u www-data app php occ config:app:set --value https://<dominioaqui>/ds-vpath/ onlyoffice DocumentServerUrl
 # Informe o JTW Token antes de executar o comando que segue
